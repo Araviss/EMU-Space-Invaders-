@@ -1,25 +1,28 @@
 #include <stdlib.h>
 #include <string>
-using namespace std;
+#include <iostream>
+#include <fstream>
+#include <cstdio>
+#include "disassembler.h"
 
 class disassembler
 {
 private:
     /* data */
 public:
-    disassembler(/* args */);
-    ~disassembler();
+    disassembler(/* args */) {
+        // Constructor implementation (if needed)
+    }
+    
+    ~disassembler() {
+        // Destructor implementation (if needed)
+    }
+
+
 };
 
-disassembler::disassembler(/* args */)
-{
-}
 
-disassembler::~disassembler()
-{
-}
 
-void fetch(string filePath ){
 
-}
+
 
