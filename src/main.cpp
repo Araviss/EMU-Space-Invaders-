@@ -35,31 +35,34 @@ int main() {
 
     // Get the total size of files
     std::streamsize size = file_disassembler.get_size(streams);
+
+    printf("size is: %d \n",size);
     
     // Allocate memory for the array
-    printf("Hex Array Success");
-    char* hex_array = new char[size];
-    printf("Hex Array Success");
+    printf("Hex Array Success\n");
+    std::vector<char> hex_array;
+    //char* hex_array = new char[size];
+    printf("Hex Array Success\n");
     // At this point, hex_array contains the concatenated contents of all files
     file_disassembler.store_files(hex_array, streams);
 
 
+        printf("we making it 1 \n");
 
     // for(int i=0; i <size; i++){
     //     printf("%02X \n", static_cast<unsigned char>(hex_array[i]));
     // };
+        printf("we making it 2\n");
 
     Instructions instruction =  Instructions(counter);
 
     //loop to iterate over memory array 
     while(true){
         instruction.getOpcode(hex_array[counter]);
-        // printf("%02X \n", static_cast<unsigned char>(hex_array[counter]));
+        printf("listen %02X \n", static_cast<unsigned char>(hex_array[counter]));
         break;
     };
 
-    // Clean up: Free the allocated memory
-    delete[] hex_array;
 
     return 0;
 }

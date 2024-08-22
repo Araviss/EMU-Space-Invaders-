@@ -15,7 +15,7 @@ public:
     //Get the total size of the files
     const std::streamsize get_size(std::vector<std::ifstream*>& files) const {
         
-        std::streamsize size;
+        std::streamsize size = 0;
         for(std::ifstream* file: files){
             file->seekg(0, file->end);
             size = size + file->tellg();
@@ -25,31 +25,36 @@ public:
     }
 
     //store all the hex values in an array
-    const void store_files(char hex_array[], std::vector<std::ifstream*> files){
-        std::streamsize offset = 0;
-        // Read the file content into the array
-        for (std::ifstream* file : files) {
+    void store_files(std::vector<char>& hex_array, const std::vector<std::ifstream*>& files) {
+    std::streamsize offset = 0;
+    printf("inside \n");
+
+    std::streamsize size = 0;
+    for (std::ifstream* file : files) {
+        printf("inside loop \n");
         if (file->is_open()) {
             // Get the size of the current file
+            printf("inside  if statement\n");
             file->seekg(0, file->end);
-            std::streamsize size = file->tellg();
+            printf("file seek \n");
+            size = file->tellg();
+            printf("file size \n");
             file->seekg(0, file->beg);
+            printf("file seek beg \n");
+
 
             // Read the content of the current file into the array at the current offset
-            if (!file->read(hex_array + offset, size)) {
+            if (!file->read(&hex_array + offset, size)) {
                 std::cerr << "Failed to read the file\n";
-                delete[] hex_array;
                 break;
             }
-
+            printf("fi;e offset\n");
             // Update the offset by adding the size of the current file
             offset += size;
-
-            // Close the file
-            file->close();
+           ;
         } else {
             std::cerr << "Failed to open a file\n";
-            }
+        }
         }   
     }
 };
